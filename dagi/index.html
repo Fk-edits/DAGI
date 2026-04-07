@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>NEO HTML MASTERY | Grade 11 Unit 4 · Pro Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: radial-gradient(ellipse at 20% 30%, #0a0c12, #010101);
+            color: #f0f3fa;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        .bg-glow {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            background: radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.08), transparent 70%);
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111827;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 20px;
+        }
+
+        /* header */
+        .hero {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            backdrop-filter: blur(12px);
+            background: rgba(2, 6, 23, 0.55);
+            border-bottom: 1px solid rgba(59,130,246,0.3);
+        }
+        .hero h1 {
+            font-size: 3.8rem;
+            background: linear-gradient(135deg, #38bdf8, #c084fc, #facc15);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+        .glow-text {
+            text-shadow: 0 0 5px rgba(56,189,248,0.3);
+        }
+        .toc-pro {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+        .toc-pro a {
+            background: #1e293bcc;
+            backdrop-filter: blur(8px);
+            border: 1px solid #334155;
+            padding: 0.6rem 1.3rem;
+            border-radius: 60px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #cbd5e6;
+            transition: all 0.25s ease;
+            font-size: 0.85rem;
+        }
+        .toc-pro a:hover {
+            background: #3b82f6;
+            color: white;
+            border-color: #60a5fa;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -10px #3b82f680;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* PRO CARD */
+        .pro-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(59,130,246,0.25);
+            transition: all 0.3s;
+            overflow: hidden;
+            box-shadow: 0 25px 35px -12px rgba(0,0,0,0.5);
+        }
+        .pro-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 20px 35px -10px #3b82f640;
+        }
+        .card-header {
+            background: rgba(2,6,23,0.7);
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+        }
+        .card-header h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: linear-gradient(120deg, #facc15, #ffb347);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .topic-badge {
+            background: #3b82f620;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            border: 1px solid #3b82f680;
+        }
+
+        /* grid for examples */
+        .example-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            padding: 1.8rem;
+        }
+        .example-item {
+            background: #0f172a80;
+            border-radius: 1.5rem;
+            border: 1px solid #2d3a5e;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        .example-title {
+            background: #020617;
+            padding: 0.7rem 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            border-left: 4px solid #3b82f6;
+        }
+        .dual-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            padding: 1.2rem;
+        }
+        @media (max-width: 800px) {
+            .dual-panel { grid-template-columns: 1fr; }
+        }
+        .code-area {
+            background: #010314;
+            border-radius: 1rem;
+            padding: 1rem;
+            border: 1px solid #2d3a5e;
+            position: relative;
+        }
+        .code-area pre {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: #b9f3b0;
+            margin: 0;
+        }
+        .copy-code {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.8rem;
+            background: #1e293b;
+            border: none;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .output-area {
+            background: #fefefe;
+            color: #0a0f1e;
+            border-radius: 1rem;
+            padding: 1rem;
+            border: 1px solid #cbd5e1;
+            box-shadow: inset 0 0 0 1px #ffffff30, 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .tag-explanation {
+            background: #1a2639;
+            margin: 0.5rem 1rem 1rem 1rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            font-size: 0.85rem;
+            border-left: 5px solid #facc15;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            align-items: center;
+        }
+        .tag-badge {
+            background: #00000055;
+            font-family: monospace;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            color: #facc15;
+            font-weight: bold;
+        }
+        hr {
+            border-color: #334155;
+            margin: 0.5rem 0;
+        }
+        .footer-pro {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #1e293b;
+            font-size: 0.8rem;
+            color: #6c7a91;
+        }
+        button {
+            background: none;
+            border: none;
+        }
+        .inline-icon {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="hero">
+    <h1>⚡ HYPER HTML · UNIT 4</h1>
+    <p style="font-size: 1.1rem; max-width: 700px; margin: 1rem auto;">Pro-level deep dive — live code, output, and explicit tag definitions.<br>Built for Dagim & future web masters.</p>
+    <div class="toc-pro">
+        <a href="#web-foundations">🌐 WEB & DESIGN</a>
+        <a href="#structure-basics">🏗️ STRUCTURE</a>
+        <a href="#tags-attributes">🏷️ TAGS & ATTR</a>
+        <a href="#multimedia">🎬 MEDIA</a>
+        <a href="#links-master">🔗 LINKS</a>
+        <a href="#tables-master">📊 TABLES</a>
+        <a href="#lists-master">📃 LISTS</a>
+    </div>
+</div>
+
+<div class="container">
+    
+    <!-- SECTION 1: WWW & WEBSITE DESIGN -->
+    <div class="pro-card" id="web-foundations">
+        <div class="card-header"><h2>🌍 1. World Wide Web & Design Principles</h2><div class="topic-badge">core theory</div></div>
+        <div class="example-grid">
+            <div class="example-item">
+                <div class="example-title">📡 The Web vs Internet</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;!-- Quick facts --&gt;
+Internet = global network of computers.
+WWW   = service (webpages) over HTTP.
+Foundations: HTML, HTTP, Browser, Server.</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area">
+                        <p>✅ <strong>Key takeaway:</strong> Websites run on the Web. E‑gov, e‑learning, e‑commerce all use websites.</p>
+                        <p>🎯 <em>Design guidelines:</em> target audience, navigation, consistency, simplicity, accessibility.</p>
+                    </div>
+                </div>
+                <div class="tag-explanation"><span class="tag-badge">📘 Concept</span> The Web is an information system — Tim Berners-Lee, 1989. Websites = collection of pages. Good design = better UX.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: HTML STRUCTURE & BASICS -->
+    <div class="pro-card" id="structure-basics">
+        <div class="card-header"><h2>🏛️ 2. HTML Document Structure</h2><div class="topic-badge">&lt;!DOCTYPE html&gt;</div></div>
+        <div class="example-grid">
+            <div class="example-item">
+                <div class="example-title">📄 Minimal HTML skeleton</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;My Page&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello Dagim&lt;/h1&gt;
+  &lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><h1 style="margin:0 0 6px 0;">Hello Dagim</h1><p>This is a paragraph.</p></div>
+                </div>
+                <div class="tag-explanation"><span class="tag-badge">&lt;html&gt;</span> root element &nbsp;|&nbsp; <span class="tag-badge">&lt;head&gt;</span> metadata &nbsp;|&nbsp; <span class="tag-badge">&lt;body&gt;</span> visible content &nbsp;|&nbsp; <span class="tag-badge">&lt;h1&gt;</span> main heading &nbsp;|&nbsp; <span class="tag-badge">&lt;p&gt;</span> paragraph</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAGS + ATTRIBUTES + VOID -->
+    <div class="pro-card" id="tags-attributes">
+        <div class="card-header"><h2>🏷️ 3. Tags, Attributes & Void Elements</h2><div class="topic-badge">semantic power</div></div>
+        <div class="example-grid">
+            <div class="example-item">
+                <div class="example-title">🔖 Common inline tags & attributes</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;p&gt;This is &lt;b&gt;bold&lt;/b&gt; and &lt;i&gt;italic&lt;/i&gt;.&lt;/p&gt;
+&lt;p align="center"&gt;Centered paragraph using align attr.&lt;/p&gt;
+&lt;hr&gt; &lt;!-- horizontal rule (void) --&gt;
+Line break &lt;br&gt; after this.</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><p>This is <b>bold</b> and <i>italic</i>.</p><p style="text-align:center">Centered paragraph using align attr.</p><hr style="margin:5px 0"><span>Line break <br> after this.</span></div>
+                </div>
+                <div class="tag-explanation"><span class="tag-badge">&lt;b&gt;</span> bold text &nbsp;•&nbsp; <span class="tag-badge">&lt;i&gt;</span> italic &nbsp;•&nbsp; <span class="tag-badge">align</span> attribute &nbsp;•&nbsp; <span class="tag-badge">&lt;hr&gt;</span> horizontal rule (void) &nbsp;•&nbsp; <span class="tag-badge">&lt;br&gt;</span> line break (void)</div>
+            </div>
+            <div class="example-item">
+                <div class="example-title">🎨 Attributes: img src, width, alt</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;img src="image.jpg" alt="footpath" width="180"&gt;
+&lt;img src="image.jpg" style="border-radius:12px;"&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><img src="image.jpg" alt="footpath" width="180"><br><img src="image.jpg" style="border-radius:12px; margin-top:8px;"></div>
+                </div>
+                <div class="tag-explanation"><span class="tag-badge">&lt;img&gt;</span> void element • <span class="tag-badge">src</span> source URL • <span class="tag-badge">alt</span> accessibility • <span class="tag-badge">width/height</span> control size</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MULTIMEDIA VIDEO -->
+    <div class="pro-card" id="multimedia">
+        <div class="card-header"><h2>🎥 4. Multimedia: Video & Audio (HTML5)</h2><div class="topic-badge">&lt;video&gt; element</div></div>
+        <div class="example-grid">
+            <div class="example-item">
+                <div class="example-title">🎬 Embedding video with controls</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;video width="300" controls&gt;
+  &lt;source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4"&gt;
+  Your browser does not support video.
+&lt;/video&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><video width="280" controls style="border-radius: 16px;"><source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4"></video><p class="tag-explanation" style="margin-top:8px;"><span class="tag-badge">&lt;video&gt;</span> defines video • <span class="tag-badge">controls</span> adds play/pause • <span class="tag-badge">&lt;source&gt;</span> specifies file</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LINKS: absolute, relative, image link, internal -->
+    <div class="pro-card" id="links-master">
+        <div class="card-header"><h2>🔗 5. Hyperlinks — Absolute, Relative, Image & Section Links</h2><div class="topic-badge">&lt;a&gt; anchor</div></div>
+        <div class="example-grid">
+            <div class="example-item">
+                <div class="example-title">🌐 External links & target attribute</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;a href="https://www.ethiotelecom.et" target="_blank"&gt;Ethio Telecom (new tab)&lt;/a&gt;
+&lt;a href="https://www.cbe.com.et"&gt;Commercial Bank of Ethiopia&lt;/a&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><a href="https://www.ethiotelecom.et" target="_blank">📡 Ethio Telecom (new tab)</a><br><a href="https://www.cbe.com.et">🏦 Commercial Bank of Ethiopia</a></div>
+                </div>
+                <div class="tag-explanation"><span class="tag-badge">href</span> destination URL • <span class="tag-badge">target="_blank"</span> open new tab • default _self</div>
+            </div>
+            <div class="example-item">
+                <div class="example-title">🖼️ Image as a clickable link</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;a href="https://www.ethiopianairlines.com"&gt;
+  &lt;img src="https://picsum.photos/id/13/150/80" alt="Ethiopian Airlines"&gt;
+&lt;/a&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><a href="https://www.ethiopianairlines.com" target="_blank"><img src="image.jpg" alt="airlines" style="border-radius: 12px;"></a><p><small>click image → Ethiopian Airlines website</small></p></div>
+                </div>
+                <div class="tag-explanation">🔹 Nesting <span class="tag-badge">&lt;img&gt;</span> inside <span class="tag-badge">&lt;a&gt;</span> creates image hyperlink.</div>
+            </div>
+            <div class="example-item">
+                <div class="example-title">📍 Internal link (same page section)</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;a href="#pro-tips-section"&gt;Go to Pro Tips&lt;/a&gt;
+...
+&lt;h3 id="pro-tips-section"&gt;🔥 Pro Tips&lt;/h3&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><a href="#special-pro-tips">⬇️ Click to jump to Pro Tips section (at bottom)</a><br><p style="font-size:0.7rem;">*smooth scroll demo - see footer area</p></div>
+                </div>
+                <div class="tag-explanation"><span class="tag-badge">id</span> attribute creates destination, <span class="tag-badge">href="#id"</span> links to it. Perfect for table of contents.</div>
+            </div>
+            <div class="example-item">
+                <div class="example-title">🌐 Absolute vs Relative URL</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;!-- Absolute --&gt;
+https://www.example.com/images/logo.png
+&lt;!-- Relative (assuming same folder) --&gt;
+&lt;a href="about.html"&gt;About&lt;/a&gt;
+&lt;img src="assets/photo.jpg"&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><code>Absolute = full path (protocol+domain)</code><br><code>Relative = path relative to current file</code><br>✅ Best practice: use relative for internal resources.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABLES: basic, colspan/rowspan, layout -->
+    <div class="pro-card" id="tables-master">
+        <div class="card-header"><h2>📊 6. HTML Tables — Data Grids, Merging Cells</h2><div class="topic-badge">&lt;table&gt; &lt;tr&gt; &lt;td&gt; &lt;th&gt;</div></div>
+        <div class="example-grid">
+            <div class="example-item">
+                <div class="example-title">📋 Basic student marks table</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;table border="1"&gt;
+  &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Score&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Dagim&lt;/td&gt;&lt;td&gt;98&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Betty&lt;/td&gt;&lt;td&gt;94&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><table border="1" style="border-collapse:collapse; background:white; color:black"><tr><th>Name</th><th>Score</th></tr><tr><td>Dagim</td><td>98</td></tr><tr><td>Betty</td><td>94</td></tr></table></div>
+                </div>
+                <div class="tag-explanation"><span class="tag-badge">&lt;table&gt;</span> defines table • <span class="tag-badge">&lt;tr&gt;</span> row • <span class="tag-badge">&lt;th&gt;</span> header cell • <span class="tag-badge">&lt;td&gt;</span> data cell</div>
+            </div>
+            <div class="example-item">
+                <div class="example-title">🧩 colspan & rowspan (merge magic)</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;table border="1"&gt;
+  &lt;tr&gt;&lt;th colspan="2"&gt;Semester Report&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td rowspan="2"&gt;Dagim&lt;/td&gt;&lt;td&gt;HTML: 100&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;CSS: 97&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><table border="1" style="border-collapse:collapse; background:white; color:black"><tr><th colspan="2">Semester Report</th></tr><tr><td rowspan="2">Dagim</td><td>HTML: 100</td></tr><tr><td>CSS: 97</td></tr></table></div>
+                </div>
+                <div class="tag-explanation"><span class="tag-badge">colspan</span> merges columns horizontally • <span class="tag-badge">rowspan</span> merges rows vertically — powerful for dashboards.</div>
+            </div>
+            <div class="example-item">
+                <div class="example-title">🏗️ Table as page layout (classic)</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;table width="100%"&gt;
+  &lt;tr bgcolor="#ccc"&gt;&lt;td colspan="2"&gt;HEADER&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td width="30%"&gt;Sidebar&lt;/td&gt;&lt;td&gt;Content&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td colspan="2"&gt;Footer&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><table width="100%" style="background:#eef2ff; color:#0f172a; border-radius:12px;"><tr style="background:#cbd5e1;"><td colspan="2"><b>📌 HEADER</b></td></tr><tr><td width="30%">🔹 Sidebar</td><td>✨ Main content area</td></tr><tr style="background:#cbd5e1;"><td colspan="2">© Footer</td></tr></table></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LISTS: ordered, unordered, description, nested -->
+    <div class="pro-card" id="lists-master">
+        <div class="card-header"><h2>📃 7. HTML Lists — Ordered, Unordered, Description & Nesting</h2><div class="topic-badge">&lt;ol&gt; &lt;ul&gt; &lt;dl&gt;</div></div>
+        <div class="example-grid">
+            <div class="example-item">
+                <div class="example-title">🔢 Ordered list (steps)</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;ol type="1"&gt;
+  &lt;li&gt;Learn HTML&lt;/li&gt;
+  &lt;li&gt;Practice tables&lt;/li&gt;
+  &lt;li&gt;Build project&lt;/li&gt;
+&lt;/ol&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><ol><li>Learn HTML</li><li>Practice tables</li><li>Build project</li></ol></div>
+                </div>
+                <div class="tag-explanation"><span class="tag-badge">&lt;ol&gt;</span> ordered/numbered • <span class="tag-badge">type</span> (1, A, a, I) • <span class="tag-badge">&lt;li&gt;</span> list item</div>
+            </div>
+            <div class="example-item">
+                <div class="example-title">🔘 Unordered list (bullet)</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;ul type="circle"&gt;
+  &lt;li&gt;HTML5&lt;/li&gt;
+  &lt;li&gt;CSS3&lt;/li&gt;
+  &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><ul type="circle"><li>HTML5</li><li>CSS3</li><li>JavaScript</li></ul></div>
+                </div>
+                <div class="tag-explanation"><span class="tag-badge">&lt;ul&gt;</span> unordered list • bullet styles: disc, circle, square</div>
+            </div>
+            <div class="example-item">
+                <div class="example-title">📖 Description list (glossary)</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;&lt;dd&gt;HyperText Markup Language&lt;/dd&gt;
+  &lt;dt&gt;HTTP&lt;/dt&gt;&lt;dd&gt;HyperText Transfer Protocol&lt;/dd&gt;
+&lt;/dl&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><dl><dt><strong>HTML</strong></dt><dd>HyperText Markup Language</dd><dt><strong>HTTP</strong></dt><dd>HyperText Transfer Protocol</dd></dl></div>
+                </div>
+                <div class="tag-explanation"><span class="tag-badge">&lt;dl&gt;</span> description list • <span class="tag-badge">&lt;dt&gt;</span> term • <span class="tag-badge">&lt;dd&gt;</span> definition</div>
+            </div>
+            <div class="example-item">
+                <div class="example-title">🌲 Nested lists (mix types)</div>
+                <div class="dual-panel">
+                    <div class="code-area"><pre>&lt;ul&gt;
+  &lt;li&gt;Frontend
+    &lt;ol&gt;&lt;li&gt;React&lt;/li&gt;&lt;li&gt;Vue&lt;/li&gt;&lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Backend
+    &lt;ul&gt;&lt;li&gt;Django&lt;/li&gt;&lt;li&gt;Flask&lt;/li&gt;&lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</pre><button class="copy-code">copy</button></div>
+                    <div class="output-area"><ul><li>Frontend<ol><li>React</li><li>Vue</li></ol></li><li>Backend<ul><li>Django</li><li>Flask</li></ul></li></ul></div>
+                </div>
+                <div class="tag-explanation">✅ Nest any list type inside another — perfect for outlines.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRO TIPS SECTION (internal link target) -->
+    <div id="special-pro-tips" class="pro-card" style="border-left: 6px solid #facc15;">
+        <div class="card-header"><h2>🔥 Pro Tips & Unit Summary</h2><div class="topic-badge">Dagim's mastery</div></div>
+        <div style="padding: 1.5rem;">
+            <p>✨ <strong>Remember:</strong> Every HTML element has semantic meaning. Use <code>&lt;strong&gt;</code> instead of <code>&lt;b&gt;</code> for importance. Always add <code>alt</code> attributes to images.</p>
+            <p>📌 <strong>Checklist from Unit 4:</strong> ✓ Web foundations ✓ Design guidelines ✓ HTML skeleton ✓ Tags & attributes ✓ Links (absolute/relative) ✓ Image links ✓ Internal navigation ✓ Tables + colspan/rowspan ✓ Lists (ordered/unordered/description/nested)</p>
+            <hr>
+            <p>🎯 Build your own mini website: combine a table for timetable, links to resources, list of your skills. You've got the power!</p>
+            <p style="margin-top:1rem;"><a href="#">⬆️ Back to top</a> &nbsp;|&nbsp; <a href="#web-foundations">Explore again</a></p>
+        </div>
+    </div>
+
+    <footer class="footer-pro">
+        <p>🚀 NEO HTML Lab · Grade 11 Unit 4 (Full coverage) · Each tag explicitly explained · Pro interactive design</p>
+        <p>© Dagim — Master the Web, one tag at a time.</p>
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.copy-code').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const parent = this.closest('.code-area');
+            const codeBlock = parent.querySelector('pre');
+            if(codeBlock) {
+                navigator.clipboard.writeText(codeBlock.innerText).then(() => {
+                    this.innerText = '✓ Copied!';
+                    setTimeout(() => { this.innerText = 'copy'; }, 1500);
+                }).catch(() => {
+                    this.innerText = 'error';
+                    setTimeout(() => { this.innerText = 'copy'; }, 1500);
+                });
+            }
+        });
+    });
+    // smooth internal anchor
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if(target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+</body>
+</html>
